@@ -7,6 +7,7 @@ import '@/styles/globals.css';
 
 // ** Fonts
 import { Poppins } from 'next/font/google';
+import { HeroesProvider } from '@/context/HeroesContext';
 
 const poppins = Poppins({
   weight: ['400', '700'],
@@ -26,7 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <Component {...pageProps} />
+
+      <HeroesProvider>
+        <Component {...pageProps} />
+      </HeroesProvider>
     </main>
   );
 }
