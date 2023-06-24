@@ -1,10 +1,16 @@
-import { useHeroes } from '@/hooks/useHeroes';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
-const Home: NextPage = () => {
-  const heroes = useHeroes();
-
-  return <h1>Hello, world!</h1>;
+const Root: NextPage = () => {
+  return <></>;
 };
 
-export default Home;
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: '/heroes',
+      permanent: true,
+    },
+  };
+};
+
+export default Root;
