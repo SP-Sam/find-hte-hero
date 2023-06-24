@@ -41,7 +41,7 @@ interface Props {
 
 const HeroCard: FC<Props> = ({ id, thumbnail, name, comicsCount }) => {
   return (
-    <CardContainer href={`/heroes/${id}`}>
+    <CardContainer href={`/heroes/details/${id}`}>
       <CardImage src={thumbnail} width={200} height={200} alt={name} />
       <CardTitle>{name}</CardTitle>
       <CardText>Aparece em {comicsCount} HQs</CardText>

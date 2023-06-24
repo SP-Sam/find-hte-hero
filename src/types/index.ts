@@ -28,4 +28,5 @@ export type HeroesDataTypes = {
   heroCards: HeroCardTypes[] | null;
   hero: HeroDetailTypes | null;
   fetchHeroes: (page?: number, perPage?: number, searchTerm?: string) => void;
+  fetchHeroById: (id: number) => void;
 };

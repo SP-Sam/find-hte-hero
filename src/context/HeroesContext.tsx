@@ -18,6 +18,7 @@ const defaultValues: HeroesDataTypes = {
     },
   },
   fetchHeroes: () => Promise.resolve(),
+  fetchHeroById: () => Promise.resolve(),
 };
 
 const HeroesContext = createContext(defaultValues);
@@ -40,6 +41,9 @@ const HeroesProvider: FC<Props> = ({ children }) => {
 
     try {
       setIsLoading(true);
+
+      api.defaults.baseURL = `${process.env.NEXT_PUBLIC_MARVEL_API_BASE_URL}?ts=${process.env.NEXT_PUBLIC_MARVEL_API_TIMESTAMPS}&apikey=${process.env.NEXT_PUBLIC_MARVEL_API_PUBLIC_KEY}&hash=${process.env.NEXT_PUBLIC_MARVEL_API_HASH}`;
+
       const {
         data: { data },
       } = await api.get('', {
@@ -51,14 +55,30 @@ const HeroesProvider: FC<Props> = ({ children }) => {
       });
 
       setHeroCards(data.results);
-    } catch (e) {
-      console.error(e);
+    } catch (e: any) {
+      console.error(e.message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const values = { isLoading, heroCards, hero, fetchHeroes };
+  const fetchHeroById = async (id: number) => {
+    try {
+      setIsLoading(true);
+
+      api.defaults.baseURL = `${process.env.NEXT_PUBLIC_MARVEL_API_BASE_URL}/${id}?ts=${process.env.NEXT_PUBLIC_MARVEL_API_TIMESTAMPS}&apikey=${process.env.NEXT_PUBLIC_MARVEL_API_PUBLIC_KEY}&hash=${process.env.NEXT_PUBLIC_MARVEL_API_HASH}`;
+
+      const { data } = await api.get('');
+
+      setHero(data.data.results[0]);
+    } catch (e: any) {
+      console.error(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const values = { isLoading, heroCards, hero, fetchHeroes, fetchHeroById };
 
   return (
     <HeroesContext.Provider value={values}>{children}</HeroesContext.Provider>
