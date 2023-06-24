@@ -1,6 +1,6 @@
 import { api } from '@/services/api';
 import { HeroCardTypes, HeroDetailTypes, HeroesDataTypes } from '@/types';
-import { FC, ReactNode, createContext, useState } from 'react';
+import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 
 const defaultValues: HeroesDataTypes = {
   isLoading: false,
@@ -30,6 +30,10 @@ const HeroesProvider: FC<Props> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [heroCards, setHeroCards] = useState<HeroCardTypes[] | null>(null);
   const [hero, setHero] = useState<HeroDetailTypes | null>(null);
+
+  useEffect(() => {
+    fetchHeroes();
+  }, []);
 
   const fetchHeroes = async (page = 1, perPage = 20, searchTerm = '') => {
     const skip = page * perPage - perPage;
