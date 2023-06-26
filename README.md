@@ -1,38 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Find the Hero
+<img src="src/assets/home.png" alt="Home page">
 
-## Getting Started
+> O Find the Hero é uma aplicação Front-end que te mostra todos os personagens da Marvel Comics e suas HQs.
 
-First, run the development server:
+## ⚙️ Funcionalidades
+* Listar todos os personagens
+* Ver os detalhes de um personagem e suas HQs
+  <img src="./src/assets/details.png" alt="Details page">
+* Pesquisar personagens pelo nome
+  <img src="./src/assets/search.png" alt="Search page">
 
+## 🛠️ Tecnologias utilizadas
+* [TypeScript](https://www.typescriptlang.org/)
+* [React](https://react.dev)
+* [Next.js](https://nextjs.org/)
+* [styled-components](https://styled-components.com/) (CSS-in-JS)
+* [Axios](https://axios-http.com/ptbr/)
+* [react-hook-form](https://react-hook-form.com/) (Manipulação de formulários)
+* [Lucide](https://lucide.dev/) (Ícones)
+* [Ant Design](https://ant.design/) (Componente de paginação)
+
+## 🌱 Pré-requisitos
+* Instale a última versão do [Node](https://nodejs.org/en/);
+* Para garantir o funcionamento de todas as funcionalidades da aplicação é recomendado o uso do [Google Chrome](https://www.google.com/intl/pt-BR/chrome/);
+* Para clonar o repositório instale e configure o [git](https://git-scm.com/).
+
+## ▶️ Executando o projeto localmente
+#### 1º Abra um terminal e faça o clone do projeto em sua máquina
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/SP-Sam/find-the-hero.git
+
+# Se você tem uma chave SSH configurada
+git clone git@github.com:SP-Sam/find-the-hero.git
 ```
+#### 2º Navegue até o diretório do projeto clonado e o abra em um editor de código
+```bash
+cd find-the-hero && code .
+```
+#### 3º Renomeie o arquivo `.env.example` para `.env` e cole o conteúdo recebido por e-mail
+<img src="./src/assets/.env.png" alt=".env">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 4º Instale as dependências do projeto
+```bash
+npm install
+```
+#### 5º Inicie o processo de build do projeto e aguarde até estar finalizado
+```bash
+npm run build
+```
+#### Você verá algo parecido com isso no terminal
+<img src="./src/assets/build.png" alt="build">
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+#### 6º Inicie o projeto
+```bash
+npm start
+```
+#### Você verá algo parecido com isso no terminal
+<img src="./src/assets/npm-start.png" alt="npm start">
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### É só dar um `Ctrl+Click` no link ou colar `http://localhost:3000` no seu navegador e começar a usar!
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 🧪 Executando os testes do projeto
+O Find the Hero possui testes unitários. Para executa-los abra um terminal na raiz do projeto e rode o seguinte comando:
+```bash
+npm test
+```
+#### Você verá algo parecido com isso no terminal
+<img src="./src/assets/tests.png" alt="">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### os testes serão executados no `watch mode` do Jest. Para sair do `watch mode` basta apertar a tecla `q` ou `Ctrl+C`.
 
-## Learn More
+## 👨‍💻 Desenvolvedor
+<a href="https://www.linkedin.com/in/spsam/">
+  <img src="https://avatars.githubusercontent.com/u/72403810?v=4" width="100px" alt="Imagem de Samuel Pereira">
+  <br>
+  <b>Samuel Pereira</b>
+</a>
 
-To learn more about Next.js, take a look at the following resources:
+## 🖋️ Licença
+Este projeto é um desafio técnico para um processo seletivo da empresa [Fpass](https://www.fpass.com.br/), não possui fins lucrativos e não está licenciado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[⬆️ Voltar ao topo](#find-the-hero)
+<br>
