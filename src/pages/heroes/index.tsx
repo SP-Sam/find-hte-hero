@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+// ** Libs
 import type { PaginationProps } from 'antd';
 import { Pagination } from 'antd';
 
@@ -17,41 +18,41 @@ import {
   PaginationWrapper,
 } from '@/components/layout';
 import SearchBar from '@/components/SearchBar';
+import Skeleton from '@/components/skeletons';
 
 const Home: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const skeletonArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-  const heroes = useHeroes();
+  const { isCardLoading, heroCards, total, fetchHeroes } = useHeroes();
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
-    heroes.fetchHeroes(page);
+    fetchHeroes(page);
   };
 
   return (
     <MainContainer>
       <SearchBar />
       <GridContainer>
-        {heroes.heroCards ? (
-          heroes.heroCards.map((hero) => (
-            <HeroCard
-              key={hero.id}
-              id={hero.id}
-              name={hero.name}
-              thumbnail={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-              comicsCount={hero.comics.available}
-            />
-          ))
-        ) : (
-          <p>Carregando...</p>
-        )}
+        {!isCardLoading && heroCards
+          ? heroCards.map((hero) => (
+              <HeroCard
+                key={hero.id}
+                id={hero.id}
+                name={hero.name}
+                thumbnail={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                comicsCount={hero.comics.available}
+              />
+            ))
+          : skeletonArr.map((item) => <Skeleton key={item} content="card" />)}
       </GridContainer>
 
       <PaginationWrapper>
         <Pagination
           current={currentPage}
           onChange={onChange}
-          total={heroes.total}
+          total={total}
           showSizeChanger={false}
           pageSize={20}
         />

@@ -6,11 +6,11 @@ import {
   HeroesDataTypes,
 } from '@/types';
 import { useRouter } from 'next/router';
-import { skip } from 'node:test';
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 
 const defaultValues: HeroesDataTypes = {
-  isLoading: false,
+  isCardLoading: false,
+  isDetailsLoading: false,
   heroCards: [],
   hero: {
     id: 0,
@@ -39,7 +39,8 @@ interface Props {
 }
 
 const HeroesProvider: FC<Props> = ({ children }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
+  const [isDetailsLoading, setIsDetailsLoading] = useState<boolean>(false);
   const [heroCards, setHeroCards] = useState<HeroCardTypes[] | null>(null);
   const [hero, setHero] = useState<HeroDetailTypes | null>(null);
   const [comicCards, setComicCards] = useState<ComicCardTypes[] | null>(null);
@@ -59,8 +60,7 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     const skip = page * 20 - 20;
 
     try {
-      setIsLoading(true);
-
+      setIsCardLoading(true);
       const {
         data: { data },
       } = await api.get('/characters', {
@@ -76,13 +76,13 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     } catch (e: any) {
       console.error(e.message);
     } finally {
-      setIsLoading(false);
+      setIsCardLoading(false);
     }
   };
 
   const fetchHeroById = async (id: number) => {
     try {
-      setIsLoading(true);
+      setIsDetailsLoading(true);
 
       const { data } = await api.get(`characters/${id}`);
 
@@ -90,7 +90,7 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     } catch (e: any) {
       console.error(e.message);
     } finally {
-      setIsLoading(false);
+      setIsDetailsLoading(false);
     }
   };
 
@@ -98,6 +98,8 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     const skip = page * 20 - 20;
 
     try {
+      setIsCardLoading(true);
+
       const {
         data: { data },
       } = await api.get(`characters/${characterId}/comics`, {
@@ -107,15 +109,18 @@ const HeroesProvider: FC<Props> = ({ children }) => {
         },
       });
 
-      setComicCards(data.results);
       setTotalComics(data.total);
+      setComicCards(data.results);
     } catch (e: any) {
       console.error(e.message);
+    } finally {
+      setIsCardLoading(false);
     }
   };
 
   const values = {
-    isLoading,
+    isCardLoading,
+    isDetailsLoading,
     heroCards,
     hero,
     comicCards,

@@ -15,6 +15,7 @@ import {
   PaginationWrapper,
 } from '@/components/layout';
 import { useHeroes } from '@/hooks/useHeroes';
+import Skeleton from '@/components/skeletons';
 
 const SearchResultText = styled.h2`
   font-size: 1rem;
@@ -26,10 +27,11 @@ const SearchResultText = styled.h2`
 `;
 
 const SearchPage: NextPage = () => {
+  const skeletonArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const [currentPage, setCurrentPage] = useState(1);
 
   const router = useRouter();
-  const { heroCards, fetchHeroes, total } = useHeroes();
+  const { heroCards, fetchHeroes, total, isCardLoading } = useHeroes();
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
@@ -53,19 +55,17 @@ const SearchPage: NextPage = () => {
         Resultado da busca: &quot;{router.query.q}&quot;
       </SearchResultText>
       <GridContainer>
-        {heroCards ? (
-          heroCards.map((hero) => (
-            <HeroCard
-              key={hero.id}
-              id={hero.id}
-              name={hero.name}
-              thumbnail={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-              comicsCount={hero.comics.available}
-            />
-          ))
-        ) : (
-          <p>Carregando...</p>
-        )}
+        {!isCardLoading && heroCards
+          ? heroCards.map((hero) => (
+              <HeroCard
+                key={hero.id}
+                id={hero.id}
+                name={hero.name}
+                thumbnail={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                comicsCount={hero.comics.available}
+              />
+            ))
+          : skeletonArr.map((item) => <Skeleton key={item} content="card" />)}
       </GridContainer>
       <PaginationWrapper>
         <Pagination

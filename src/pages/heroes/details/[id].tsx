@@ -22,12 +22,21 @@ import {
   SubtitleText,
 } from '@/components/layout';
 import SearchBar from '@/components/SearchBar';
+import Skeleton from '@/components/skeletons';
 
 const HeroDetails: NextPage = () => {
+  const skeletonArr = [0, 1, 2, 3];
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
-  const { hero, fetchHeroById, fetchHeroComics, comicCards, totalComics } =
-    useHeroes();
+  const {
+    hero,
+    fetchHeroById,
+    fetchHeroComics,
+    comicCards,
+    totalComics,
+    isDetailsLoading,
+    isCardLoading,
+  } = useHeroes();
 
   useEffect(() => {
     if (router.query.id) {
@@ -47,62 +56,65 @@ const HeroDetails: NextPage = () => {
   return (
     <MainContainer>
       <SearchBar />
-      {hero ? (
-        <>
+      <>
+        {!isDetailsLoading && hero ? (
           <DetailHeader>
             <DetailImage
-              src={`${hero?.thumbnail.path}.${hero?.thumbnail.extension}`}
-              alt={hero!.name}
+              src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+              alt={hero.name}
               width={500}
               height={500}
             />
 
             <DetailsTextWrapper>
-              <DetailTitle>{hero!.name}</DetailTitle>
+              <DetailTitle>{hero.name}</DetailTitle>
               <DetailDescription>
-                {hero!.description || 'Descrição indisponível'}
+                {hero.description || 'Descrição indisponível'}
               </DetailDescription>
             </DetailsTextWrapper>
           </DetailHeader>
+        ) : (
+          <Skeleton content="hero-details" />
+        )}
 
-          <ComicsWrapper>
-            {comicCards && comicCards.length > 0 ? (
-              <>
-                <SubtitleText>
-                  {`Aparece em ${hero.comics.available} HQs`}
-                </SubtitleText>
-                <ComicsContainer>
-                  {comicCards &&
-                    comicCards.map((comic) => (
+        <ComicsWrapper>
+          {hero && comicCards && comicCards.length > 0 ? (
+            <>
+              <SubtitleText>
+                {`Aparece em ${hero.comics.available} HQs`}
+              </SubtitleText>
+              <ComicsContainer>
+                {!isCardLoading && comicCards
+                  ? comicCards.map((comic) => (
                       <ComicCard
                         key={comic.id}
                         title={comic.title}
                         thumbnail={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                         detailsUrl={comic.urls[0].url}
                       />
+                    ))
+                  : skeletonArr.map((item) => (
+                      <Skeleton key={item} content="card" />
                     ))}
-                </ComicsContainer>
+              </ComicsContainer>
 
-                <PaginationWrapper>
-                  <Pagination
-                    current={currentPage}
-                    onChange={onChange}
-                    total={totalComics}
-                    showSizeChanger={false}
-                    pageSize={20}
-                  />
-                </PaginationWrapper>
-              </>
-            ) : (
-              <SubtitleText>
-                Este personagem não aparece em nenhuma HQ
-              </SubtitleText>
-            )}
-          </ComicsWrapper>
-        </>
-      ) : (
-        <p>Carregando...</p>
-      )}
+              <PaginationWrapper>
+                <Pagination
+                  current={currentPage}
+                  onChange={onChange}
+                  total={totalComics}
+                  showSizeChanger={false}
+                  pageSize={20}
+                />
+              </PaginationWrapper>
+            </>
+          ) : (
+            <SubtitleText>
+              Este personagem não aparece em nenhuma HQ
+            </SubtitleText>
+          )}
+        </ComicsWrapper>
+      </>
     </MainContainer>
   );
 };

@@ -37,7 +37,8 @@ export type ComicCardTypes = {
 };
 
 export type HeroesDataTypes = {
-  isLoading: boolean;
+  isCardLoading: boolean;
+  isDetailsLoading: boolean;
   heroCards: HeroCardTypes[] | null;
   hero: HeroDetailTypes | null;
   comicCards: ComicCardTypes[] | null;
