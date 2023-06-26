@@ -1,4 +1,4 @@
-import { ArrowLeft, Search } from 'lucide-react';
+import { ArrowLeft, Home, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
@@ -22,10 +22,14 @@ const BackButton = styled.button`
   align-items: center;
   background: transparent;
   border: none;
-  color: #8132ff;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: 150ms;
 
   &:hover {
     cursor: pointer;
+    background-color: #ffffff34;
   }
 `;
 
@@ -83,9 +87,15 @@ const SearchBar: FC = () => {
   return (
     <SearchBarWrapper>
       {router.pathname !== '/heroes' && (
-        <BackButton onClick={() => router.back()}>
-          <ArrowLeft />
-        </BackButton>
+        <>
+          <BackButton onClick={() => router.back()}>
+            <ArrowLeft />
+          </BackButton>
+
+          <BackButton onClick={() => router.replace('/heroes')}>
+            <Home />
+          </BackButton>
+        </>
       )}
 
       <Form onSubmit={handleSubmit(onSearch)}>
