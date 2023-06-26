@@ -10,7 +10,6 @@ export const GridContainer = styled.div`
   display: grid;
   gap: 1rem;
   margin: 0 auto;
-  padding-bottom: 2rem;
   place-items: center;
 
   @media screen and (min-width: 640px) {
@@ -44,8 +43,8 @@ export const DetailHeader = styled.section`
 
 export const DetailImage = styled(Image)`
   width: 80%;
-  max-width: 18.75rem;
-  max-height: 18.75rem;
+  max-width: 16rem;
+  max-height: 16rem;
   height: 100%;
   border-radius: 0.625rem;
 `;
@@ -92,11 +91,18 @@ export const ComicsWrapper = styled.div`
   max-width: 48rem;
   width: 90%;
   margin: 0 auto;
-  padding: 0 0 1.5rem 0;
 `;
 
 export const SubtitleText = styled.h2`
   font-size: 1rem;
   color: #ffffff;
   padding: 1rem 0 0 1rem;
+`;
+
+export const PaginationWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
 `;

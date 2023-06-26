@@ -1,3 +1,8 @@
+import { useState } from 'react';
+
+import type { PaginationProps } from 'antd';
+import { Pagination } from 'antd';
+
 // ** Next
 import { NextPage } from 'next';
 
@@ -6,11 +11,22 @@ import { useHeroes } from '@/hooks/useHeroes';
 
 // ** Components
 import HeroCard from '@/components/HeroCard';
-import { GridContainer, MainContainer } from '@/components/layout';
+import {
+  GridContainer,
+  MainContainer,
+  PaginationWrapper,
+} from '@/components/layout';
 import SearchBar from '@/components/SearchBar';
 
 const Home: NextPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const heroes = useHeroes();
+
+  const onChange: PaginationProps['onChange'] = (page) => {
+    setCurrentPage(page);
+    heroes.fetchHeroes(page);
+  };
 
   return (
     <MainContainer>
@@ -30,6 +46,16 @@ const Home: NextPage = () => {
           <p>Carregando...</p>
         )}
       </GridContainer>
+
+      <PaginationWrapper>
+        <Pagination
+          current={currentPage}
+          onChange={onChange}
+          total={heroes.total}
+          showSizeChanger={false}
+          pageSize={20}
+        />
+      </PaginationWrapper>
     </MainContainer>
   );
 };

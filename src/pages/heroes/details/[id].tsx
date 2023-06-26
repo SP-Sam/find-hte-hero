@@ -1,7 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+
+import { useHeroes } from '@/hooks/useHeroes';
+
+import type { PaginationProps } from 'antd';
+import { Pagination } from 'antd';
 
 import ComicCard from '@/components/ComicCard';
 import {
@@ -13,22 +18,31 @@ import {
   DetailTitle,
   DetailsTextWrapper,
   MainContainer,
+  PaginationWrapper,
   SubtitleText,
 } from '@/components/layout';
-import { useHeroes } from '@/hooks/useHeroes';
 import SearchBar from '@/components/SearchBar';
 
 const HeroDetails: NextPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
-  const { hero, fetchHeroById, fetchHeroComics, comicCards } = useHeroes();
+  const { hero, fetchHeroById, fetchHeroComics, comicCards, totalComics } =
+    useHeroes();
 
   useEffect(() => {
     if (router.query.id) {
       fetchHeroById(+router.query.id);
-      fetchHeroComics(+router.query.id);
+      fetchHeroComics(+router.query.id, currentPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
+
+  const onChange: PaginationProps['onChange'] = (page) => {
+    setCurrentPage(page);
+    if (router.query.id) {
+      fetchHeroComics(+router.query.id, page);
+    }
+  };
 
   return (
     <MainContainer>
@@ -68,6 +82,16 @@ const HeroDetails: NextPage = () => {
                       />
                     ))}
                 </ComicsContainer>
+
+                <PaginationWrapper>
+                  <Pagination
+                    current={currentPage}
+                    onChange={onChange}
+                    total={totalComics}
+                    showSizeChanger={false}
+                    pageSize={20}
+                  />
+                </PaginationWrapper>
               </>
             ) : (
               <SubtitleText>

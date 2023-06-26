@@ -41,7 +41,9 @@ export type HeroesDataTypes = {
   heroCards: HeroCardTypes[] | null;
   hero: HeroDetailTypes | null;
   comicCards: ComicCardTypes[] | null;
-  fetchHeroes: (page?: number, perPage?: number, searchTerm?: string) => void;
+  fetchHeroes: (page?: number, searchTerm?: string) => void;
   fetchHeroById: (id: number) => void;
-  fetchHeroComics: (characterId: number) => void;
+  fetchHeroComics: (characterId: number, page: number) => void;
+  total: number;
+  totalComics: number;
 };

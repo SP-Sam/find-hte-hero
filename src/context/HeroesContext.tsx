@@ -6,6 +6,7 @@ import {
   HeroesDataTypes,
 } from '@/types';
 import { useRouter } from 'next/router';
+import { skip } from 'node:test';
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 
 const defaultValues: HeroesDataTypes = {
@@ -27,6 +28,8 @@ const defaultValues: HeroesDataTypes = {
   fetchHeroes: () => Promise.resolve(),
   fetchHeroById: () => Promise.resolve(),
   fetchHeroComics: () => Promise.resolve(),
+  total: 0,
+  totalComics: 0,
 };
 
 const HeroesContext = createContext(defaultValues);
@@ -40,6 +43,8 @@ const HeroesProvider: FC<Props> = ({ children }) => {
   const [heroCards, setHeroCards] = useState<HeroCardTypes[] | null>(null);
   const [hero, setHero] = useState<HeroDetailTypes | null>(null);
   const [comicCards, setComicCards] = useState<ComicCardTypes[] | null>(null);
+  const [total, setTotal] = useState<number>(0);
+  const [totalComics, setTotalComics] = useState<number>(0);
 
   const router = useRouter();
 
@@ -50,8 +55,8 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
-  const fetchHeroes = async (page = 1, perPage = 20, searchTerm = '') => {
-    const skip = page * perPage - perPage;
+  const fetchHeroes = async (page = 1, searchTerm = '') => {
+    const skip = page * 20 - 20;
 
     try {
       setIsLoading(true);
@@ -60,12 +65,13 @@ const HeroesProvider: FC<Props> = ({ children }) => {
         data: { data },
       } = await api.get('/characters', {
         params: {
-          limit: perPage,
+          limit: 20,
           offset: skip,
           nameStartsWith: searchTerm ? searchTerm : undefined,
         },
       });
 
+      setTotal(data.total);
       setHeroCards(data.results);
     } catch (e: any) {
       console.error(e.message);
@@ -88,13 +94,21 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const fetchHeroComics = async (characterId: number) => {
+  const fetchHeroComics = async (characterId: number, page = 1) => {
+    const skip = page * 20 - 20;
+
     try {
       const {
         data: { data },
-      } = await api.get(`characters/${characterId}/comics`);
+      } = await api.get(`characters/${characterId}/comics`, {
+        params: {
+          limit: 20,
+          offset: skip,
+        },
+      });
 
       setComicCards(data.results);
+      setTotalComics(data.total);
     } catch (e: any) {
       console.error(e.message);
     }
@@ -108,6 +122,8 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     fetchHeroes,
     fetchHeroById,
     fetchHeroComics,
+    total,
+    totalComics,
   };
 
   return (
