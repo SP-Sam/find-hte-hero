@@ -7,7 +7,7 @@
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background: linear-gradient(270deg, #7a3ddd 0%, #ff9900 100%);;
+  background: linear-gradient(270deg, #7a3ddd 0%, #ff9900 100%);
 }
 
 /* width */
@@ -30,4 +30,13 @@ body {
 /* Handle on hover */
 *::-webkit-scrollbar-thumb:hover {
   background: #b588ff;
+}
+
+.ant-pagination-item-active {
+  border-color: #fff !important;
+  background-color: #7a3ddd62 !important;
+}
+
+.ant-pagination-item-active a {
+  color: #fff !important;
 }
