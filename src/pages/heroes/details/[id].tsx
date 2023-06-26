@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+
 import ComicCard from '@/components/ComicCard';
 import {
   ComicsContainer,
@@ -11,10 +16,9 @@ import {
   SubtitleText,
 } from '@/components/layout';
 import { useHeroes } from '@/hooks/useHeroes';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import SearchBar from '@/components/SearchBar';
 
-const HeroDetails = () => {
+const HeroDetails: NextPage = () => {
   const router = useRouter();
   const { hero, fetchHeroById, fetchHeroComics, comicCards } = useHeroes();
 
@@ -28,6 +32,7 @@ const HeroDetails = () => {
 
   return (
     <MainContainer>
+      <SearchBar />
       {hero ? (
         <>
           <DetailHeader>
@@ -50,7 +55,7 @@ const HeroDetails = () => {
             {comicCards && comicCards.length > 0 ? (
               <>
                 <SubtitleText>
-                  {`Aparece em ${hero.comics.available} HQs, principais:`}
+                  {`Aparece em ${hero.comics.available} HQs`}
                 </SubtitleText>
                 <ComicsContainer>
                   {comicCards &&

@@ -10,6 +10,7 @@ export const GridContainer = styled.div`
   display: grid;
   gap: 1rem;
   margin: 0 auto;
+  padding-bottom: 2rem;
   place-items: center;
 
   @media screen and (min-width: 640px) {
@@ -34,7 +35,7 @@ export const DetailHeader = styled.section`
   width: 90%;
   max-width: 48rem;
   margin: 0 auto 0 auto;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 0 1rem 1rem 1rem;
 
   @media screen and (min-width: 768px) {
     flex-direction: row;
@@ -44,6 +45,7 @@ export const DetailHeader = styled.section`
 export const DetailImage = styled(Image)`
   width: 80%;
   max-width: 18.75rem;
+  max-height: 18.75rem;
   height: 100%;
   border-radius: 0.625rem;
 `;
@@ -56,7 +58,7 @@ export const DetailsTextWrapper = styled.div`
 `;
 
 export const DetailTitle = styled.h1`
-  color: #3d3d3d;
+  color: #ffffff;
   width: 100%;
   max-width: 18.75rem;
   text-align: center;
@@ -67,7 +69,7 @@ export const DetailTitle = styled.h1`
 `;
 
 export const DetailDescription = styled.p`
-  color: #7a7a7a;
+  color: #ececec;
   width: 100%;
   max-width: 18.75rem;
   text-align: center;
@@ -95,6 +97,6 @@ export const ComicsWrapper = styled.div`
 
 export const SubtitleText = styled.h2`
   font-size: 1rem;
-  color: #3d3d3d;
+  color: #ffffff;
   padding: 1rem 0 0 1rem;
 `;

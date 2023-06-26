@@ -44,33 +44,33 @@ const HeroesProvider: FC<Props> = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    fetchHeroes();
+    if (router.pathname === '/heroes') {
+      fetchHeroes();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const fetchHeroes = async (page = 1, perPage = 20, searchTerm = '') => {
     const skip = page * perPage - perPage;
 
-    if (router.pathname === '/heroes') {
-      try {
-        setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-        const {
-          data: { data },
-        } = await api.get('/characters', {
-          params: {
-            limit: perPage,
-            offset: skip,
-            nameStartsWith: searchTerm ? searchTerm : undefined,
-          },
-        });
+      const {
+        data: { data },
+      } = await api.get('/characters', {
+        params: {
+          limit: perPage,
+          offset: skip,
+          nameStartsWith: searchTerm ? searchTerm : undefined,
+        },
+      });
 
-        setHeroCards(data.results);
-      } catch (e: any) {
-        console.error(e.message);
-      } finally {
-        setIsLoading(false);
-      }
+      setHeroCards(data.results);
+    } catch (e: any) {
+      console.error(e.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 

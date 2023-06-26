@@ -7,25 +7,27 @@
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  background: linear-gradient(270deg, #7a3ddd 0%, #ff9900 100%);;
 }
 
 /* width */
 *::-webkit-scrollbar {
+  height: 10px;
   width: 10px;
 }
 
 /* Track */
 *::-webkit-scrollbar-track {
-  background: #f0f0f0;
+  background: transparent;
 }
 
 /* Handle */
 *::-webkit-scrollbar-thumb {
-  background: #727272;
+  background: #be96ff;
   border-radius: 1rem;
 }
 
 /* Handle on hover */
 *::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #b588ff;
 }
