@@ -1,5 +1,11 @@
 import { api } from '@/services/api';
-import { HeroCardTypes, HeroDetailTypes, HeroesDataTypes } from '@/types';
+import {
+  ComicCardTypes,
+  HeroCardTypes,
+  HeroDetailTypes,
+  HeroesDataTypes,
+} from '@/types';
+import { useRouter } from 'next/router';
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 
 const defaultValues: HeroesDataTypes = {
@@ -17,8 +23,10 @@ const defaultValues: HeroesDataTypes = {
       extension: '',
     },
   },
+  comicCards: [],
   fetchHeroes: () => Promise.resolve(),
   fetchHeroById: () => Promise.resolve(),
+  fetchHeroComics: () => Promise.resolve(),
 };
 
 const HeroesContext = createContext(defaultValues);
@@ -31,34 +39,38 @@ const HeroesProvider: FC<Props> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [heroCards, setHeroCards] = useState<HeroCardTypes[] | null>(null);
   const [hero, setHero] = useState<HeroDetailTypes | null>(null);
+  const [comicCards, setComicCards] = useState<ComicCardTypes[] | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     fetchHeroes();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]);
 
   const fetchHeroes = async (page = 1, perPage = 20, searchTerm = '') => {
     const skip = page * perPage - perPage;
 
-    try {
-      setIsLoading(true);
+    if (router.pathname === '/heroes') {
+      try {
+        setIsLoading(true);
 
-      api.defaults.baseURL = `${process.env.NEXT_PUBLIC_MARVEL_API_BASE_URL}?ts=${process.env.NEXT_PUBLIC_MARVEL_API_TIMESTAMPS}&apikey=${process.env.NEXT_PUBLIC_MARVEL_API_PUBLIC_KEY}&hash=${process.env.NEXT_PUBLIC_MARVEL_API_HASH}`;
+        const {
+          data: { data },
+        } = await api.get('/characters', {
+          params: {
+            limit: perPage,
+            offset: skip,
+            nameStartsWith: searchTerm ? searchTerm : undefined,
+          },
+        });
 
-      const {
-        data: { data },
-      } = await api.get('', {
-        params: {
-          limit: perPage,
-          offset: skip,
-          nameStartsWith: searchTerm ? searchTerm : undefined,
-        },
-      });
-
-      setHeroCards(data.results);
-    } catch (e: any) {
-      console.error(e.message);
-    } finally {
-      setIsLoading(false);
+        setHeroCards(data.results);
+      } catch (e: any) {
+        console.error(e.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -66,9 +78,7 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     try {
       setIsLoading(true);
 
-      api.defaults.baseURL = `${process.env.NEXT_PUBLIC_MARVEL_API_BASE_URL}/${id}?ts=${process.env.NEXT_PUBLIC_MARVEL_API_TIMESTAMPS}&apikey=${process.env.NEXT_PUBLIC_MARVEL_API_PUBLIC_KEY}&hash=${process.env.NEXT_PUBLIC_MARVEL_API_HASH}`;
-
-      const { data } = await api.get('');
+      const { data } = await api.get(`characters/${id}`);
 
       setHero(data.data.results[0]);
     } catch (e: any) {
@@ -78,7 +88,27 @@ const HeroesProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const values = { isLoading, heroCards, hero, fetchHeroes, fetchHeroById };
+  const fetchHeroComics = async (characterId: number) => {
+    try {
+      const {
+        data: { data },
+      } = await api.get(`characters/${characterId}/comics`);
+
+      setComicCards(data.results);
+    } catch (e: any) {
+      console.error(e.message);
+    }
+  };
+
+  const values = {
+    isLoading,
+    heroCards,
+    hero,
+    comicCards,
+    fetchHeroes,
+    fetchHeroById,
+    fetchHeroComics,
+  };
 
   return (
     <HeroesContext.Provider value={values}>{children}</HeroesContext.Provider>

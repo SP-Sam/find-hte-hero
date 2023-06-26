@@ -23,10 +23,25 @@ export type HeroDetailTypes = {
   };
 };
 
+export type ComicCardTypes = {
+  id: number;
+  title: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  urls: {
+    type: string;
+    url: string;
+  }[];
+};
+
 export type HeroesDataTypes = {
   isLoading: boolean;
   heroCards: HeroCardTypes[] | null;
   hero: HeroDetailTypes | null;
+  comicCards: ComicCardTypes[] | null;
   fetchHeroes: (page?: number, perPage?: number, searchTerm?: string) => void;
   fetchHeroById: (id: number) => void;
+  fetchHeroComics: (characterId: number) => void;
 };

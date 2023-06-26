@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
-
-import { styled } from 'styled-components';
-
 import Image from 'next/image';
+import styled from 'styled-components';
 
 const CardContainer = styled(Link)`
   width: 12.5rem;
