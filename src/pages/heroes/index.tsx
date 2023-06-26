@@ -7,12 +7,14 @@ import { useHeroes } from '@/hooks/useHeroes';
 // ** Components
 import HeroCard from '@/components/HeroCard';
 import { GridContainer, MainContainer } from '@/components/layout';
+import SearchBar from '@/components/SearchBar';
 
 const Home: NextPage = () => {
   const heroes = useHeroes();
 
   return (
     <MainContainer>
+      <SearchBar />
       <GridContainer>
         {heroes.heroCards ? (
           heroes.heroCards.map((hero) => (

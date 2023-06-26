@@ -10,7 +10,14 @@ const CardContainer = styled(Link)`
   border-radius: 0.5rem;
   overflow: hidden;
   text-decoration: none;
-  box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 15px 3px #0000004c;
+  background-color: #fff;
+  transition: 150ms;
+
+  :hover {
+    box-shadow: none;
+    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const CardImage = styled(Image)`

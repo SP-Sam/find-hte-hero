@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const CardContainer = styled(Link)`
   min-width: 12.5rem;
+  max-width: 12.5rem;
   height: 100%;
   overflow: hidden;
   text-decoration: none;
@@ -12,6 +13,7 @@ const CardContainer = styled(Link)`
   padding-bottom: 0.5rem;
   transition: 150ms;
   box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
 
   :hover {
     box-shadow: none;
