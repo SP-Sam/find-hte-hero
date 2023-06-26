@@ -11,11 +11,11 @@
   <img src="./src/assets/search.png" alt="Search page">
 
 ## 🛠️ Tecnologias utilizadas
-* [TypeScript](https://www.typescriptlang.org/)
-* [React](https://react.dev)
-* [Next.js](https://nextjs.org/)
+* [TypeScript](https://www.typescriptlang.org/) (Superset de JavaScript)
+* [React](https://react.dev) (Framework de JavaScript)
+* [Next.js](https://nextjs.org/) (Framework SSR para React)
 * [styled-components](https://styled-components.com/) (CSS-in-JS)
-* [Axios](https://axios-http.com/ptbr/)
+* [Axios](https://axios-http.com/ptbr/) (Requisições à API)
 * [react-hook-form](https://react-hook-form.com/) (Manipulação de formulários)
 * [Lucide](https://lucide.dev/) (Ícones)
 * [Ant Design](https://ant.design/) (Componente de paginação)
