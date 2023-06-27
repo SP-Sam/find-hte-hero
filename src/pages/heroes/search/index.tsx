@@ -51,9 +51,15 @@ const SearchPage: NextPage = () => {
   return (
     <MainContainer>
       <SearchBar />
-      <SearchResultText>
-        Resultado da busca: &quot;{router.query.q}&quot;
-      </SearchResultText>
+      {heroCards && heroCards.length > 0 ? (
+        <SearchResultText>
+          Resultado da busca: &quot;{router.query.q}&quot;
+        </SearchResultText>
+      ) : (
+        <SearchResultText>
+          Nenhum resultado encontrado para a busca: &quot;{router.query.q}&quot;
+        </SearchResultText>
+      )}
       <GridContainer>
         {!isCardLoading && heroCards
           ? heroCards.map((hero) => (
@@ -67,15 +73,18 @@ const SearchPage: NextPage = () => {
             ))
           : skeletonArr.map((item) => <Skeleton key={item} content="card" />)}
       </GridContainer>
-      <PaginationWrapper>
-        <Pagination
-          current={currentPage}
-          onChange={onChange}
-          total={total}
-          showSizeChanger={false}
-          pageSize={20}
-        />
-      </PaginationWrapper>
+
+      {heroCards && heroCards.length > 0 && (
+        <PaginationWrapper>
+          <Pagination
+            current={currentPage}
+            onChange={onChange}
+            total={total}
+            showSizeChanger={false}
+            pageSize={20}
+          />
+        </PaginationWrapper>
+      )}
     </MainContainer>
   );
 };
