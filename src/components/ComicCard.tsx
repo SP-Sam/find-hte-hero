@@ -3,28 +3,26 @@ import Link from 'next/link';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-const CardContainer = styled(Link)`
+const Card = styled(Link)`
   min-width: 12.5rem;
-  max-width: 12.5rem;
-  height: 100%;
   overflow: hidden;
   text-decoration: none;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   padding-bottom: 0.5rem;
-  transition: 150ms;
-  box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.3);
   background-color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 10px 10px 15px -5px #0000004c;
+  transition: 150ms;
 
   :hover {
-    box-shadow: none;
-    box-shadow: 3px 3px 15px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 15px -5px #00000099;
   }
 `;
 
 const CardImage = styled(Image)`
-  width: 12.5rem;
-  height: 18.9375rem;
-  border-radius: 0.3rem;
+  max-width: 12.5rem;
+  max-height: 18.9375rem;
+  border-radius: 0 0 0.6rem 0.6rem;
 `;
 
 const CardTitle = styled.h3`
@@ -43,10 +41,10 @@ interface Props {
 const ComicCard: FC<Props> = ({ title, thumbnail, detailsUrl }) => {
   return (
     <>
-      <CardContainer href={detailsUrl} target="_blank">
-        <CardImage src={thumbnail} width={150} height={230} alt={title} />
+      <Card href={detailsUrl} target="_blank">
+        <CardImage src={thumbnail} width={560} height={850} alt={title} />
         <CardTitle>{title}</CardTitle>
-      </CardContainer>
+      </Card>
     </>
   );
 };

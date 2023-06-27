@@ -17,7 +17,7 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={poppins.className}>
+    <div className={poppins.className}>
       <Head>
         <title>Find the Hero</title>
         <meta
@@ -31,6 +31,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <HeroesProvider>
         <Component {...pageProps} />
       </HeroesProvider>
-    </main>
+    </div>
   );
 }

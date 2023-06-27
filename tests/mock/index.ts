@@ -1,4 +1,4 @@
-import { ComicCardTypes, HeroCardTypes, HeroDetailTypes } from '@/types';
+import { ComicCardTypes, HeroCardTypes, HeroDetailsTypes } from '@/types';
 
 export const heroCardsMock: HeroCardTypes[] = [
   {
@@ -15,7 +15,7 @@ export const heroCardsMock: HeroCardTypes[] = [
   },
 ];
 
-export const heroDetailMock: HeroDetailTypes = {
+export const heroDetailMock: HeroDetailsTypes = {
   id: 1,
   name: 'Spider-man',
   comics: { available: 500 },

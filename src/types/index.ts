@@ -10,19 +10,6 @@ export type HeroCardTypes = {
   };
 };
 
-export type HeroDetailTypes = {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-  comics: {
-    available: number;
-  };
-};
-
 export type ComicCardTypes = {
   id: number;
   title: string;
@@ -36,15 +23,28 @@ export type ComicCardTypes = {
   }[];
 };
 
+export type HeroDetailsTypes = {
+  id: number;
+  name: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  comics: {
+    available: number;
+  };
+};
+
 export type HeroesDataTypes = {
   isCardLoading: boolean;
   isDetailsLoading: boolean;
+  hero: HeroDetailsTypes | null;
   heroCards: HeroCardTypes[] | null;
-  hero: HeroDetailTypes | null;
   comicCards: ComicCardTypes[] | null;
   fetchHeroes: (page?: number, searchTerm?: string) => void;
   fetchHeroById: (id: number) => void;
   fetchHeroComics: (characterId: number, page: number) => void;
-  total: number;
+  totalHeroes: number;
   totalComics: number;
 };

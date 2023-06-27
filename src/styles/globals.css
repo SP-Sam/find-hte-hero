@@ -32,6 +32,11 @@ body {
   background: #b588ff;
 }
 
+.ant-pagination-item {
+  font-size: 0.7rem !important;
+  margin: 0 !important;
+}
+
 .ant-pagination-item-active {
   border-color: #fff !important;
   background-color: #7a3ddd62 !important;
