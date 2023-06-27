@@ -1,14 +1,14 @@
 # Find the Hero, [Link do projeto](https://findthehero.vercel.app)
-<img src="src/assets/home.png" alt="Home page">
+<img src="public/assets/home.png" alt="Home page">
 
 > O Find the Hero é uma aplicação Front-end que te mostra todos os personagens da Marvel Comics e suas HQs.
 
 ## ⚙️ Funcionalidades
 * Listar todos os personagens
 * Ver os detalhes de um personagem e suas HQs
-  <img src="./src/assets/details.png" alt="Details page">
+  <img src="public/assets/details.png" alt="Details page">
 * Pesquisar personagens pelo nome
-  <img src="./src/assets/search.png" alt="Search page">
+  <img src="public/assets/search.png" alt="Search page">
 
 ## 🛠️ Tecnologias utilizadas
 * [TypeScript](https://www.typescriptlang.org/) (Superset de JavaScript)
@@ -38,7 +38,7 @@ git clone git@github.com:SP-Sam/find-the-hero.git
 cd find-the-hero && code .
 ```
 #### 3º Renomeie o arquivo `.env.example` para `.env` e cole o conteúdo recebido por e-mail
-<img src="./src/assets/.env.png" alt=".env">
+<img src="public/assets/.env.png" alt=".env">
 
 #### 4º Instale as dependências do projeto
 ```bash
@@ -49,14 +49,14 @@ npm install
 npm run build
 ```
 #### Você verá algo parecido com isso no terminal
-<img src="./src/assets/build.png" alt="build">
+<img src="public/assets/build.png" alt="build">
 
 #### 6º Inicie o projeto
 ```bash
 npm start
 ```
 #### Você verá algo parecido com isso no terminal
-<img src="./src/assets/npm-start.png" alt="npm start">
+<img src="public/assets/npm-start.png" alt="npm start">
 
 #### É só dar um `Ctrl+Click` no link ou colar `http://localhost:3000` no seu navegador e começar a usar!
 
@@ -66,7 +66,7 @@ O Find the Hero possui testes unitários. Para executa-los abra um terminal na r
 npm test
 ```
 #### Você verá algo parecido com isso no terminal
-<img src="./src/assets/tests.png" alt="">
+<img src="public/assets/tests.png" alt="">
 
 #### os testes serão executados no `watch mode` do Jest. Para sair do `watch mode` basta apertar a tecla `q` ou `Ctrl+C`.
 
