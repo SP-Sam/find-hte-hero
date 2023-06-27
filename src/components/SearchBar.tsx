@@ -1,5 +1,4 @@
 import { ArrowLeft, Home, Search } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { useForm, Controller } from 'react-hook-form';
